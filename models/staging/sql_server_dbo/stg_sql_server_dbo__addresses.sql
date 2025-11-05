@@ -4,18 +4,20 @@
     )
 }}
 
-with src_promos as (
+with src_addresses as (
     select *
-    from {{ source("SQL_SERVER_DBO", "PROMOS") }}
+    from {{ source("SQL_SERVER_DBO", "ADDRESSES") }}
 ),
 renamed_casted AS (
     SELECT
-        promo_id
-        , discount
-        , status
+        address_id
+        , address
+        , zipcode
+        , state
+        , country
         , _fivetran_deleted AS date_deleted
         , _fivetran_synced AS date_load
-    FROM src_promos
+    FROM src_addresses
     )
 
 SELECT * FROM renamed_casted

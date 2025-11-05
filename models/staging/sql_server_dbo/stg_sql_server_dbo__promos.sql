@@ -12,7 +12,7 @@ renamed_casted AS (
     SELECT
         md5(promo_id) as promo_id,
         promo_id as promo_name,
-        discount as discount_pct,
+        discount as discount_dollar,
         status,
         convert_timezone('UTC',_fivetran_synced) AS date_load_utc,
         _fivetran_deleted AS date_deleted

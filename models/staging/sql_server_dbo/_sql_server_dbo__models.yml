@@ -9,7 +9,7 @@ models:
       - name: promo_id
         data_type: text
         constraints:
-          - type: primary_key
+          - type: primary_key          
       - name: promo_name
         data_type: text
       - name: discount_dollar

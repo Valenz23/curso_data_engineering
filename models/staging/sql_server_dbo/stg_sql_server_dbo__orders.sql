@@ -11,7 +11,7 @@ with src_orders as (
 renamed_casted AS (
     SELECT
         order_id,
-        SHIPPING_SERVICE, -- sacar a otra entidad
+        md5(SHIPPING_SERVICE) as shipping_service_id, 
         SHIPPING_COST,
         address_id, -- fk de addresses
         convert_timezone('UTC',CREATED_AT) as CREATED_AT,    

@@ -13,7 +13,7 @@ renamed_casted AS (
         product_id,
         name,
         price,
-        inventory,
+        inventory, -- este que?
         convert_timezone('UTC',_fivetran_synced) AS date_load_utc,
         _fivetran_deleted AS date_deleted
     FROM src_product

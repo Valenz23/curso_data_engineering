@@ -1,6 +1,8 @@
 sources:
 
   - name: google_sheets # name of the source 
+    description: >
+      Raw data demo from Database
     schema: google_sheets # this is the schema our raw data lives in
     database: ALUMNO23_DEV_BRONZE_DB # this is the name of our database
 
@@ -17,9 +19,32 @@ sources:
 
       - name: budget
         loaded_at_field: _fivetran_synced
+        description: >
+          Data about budget in demo
         columns:
           - name: _row
+            description: >
+              Number of each row from google_sheets
+            data_tests:
+              - not_null
+              - unique
           - name: product_id
+            description: >
+              UUID for each unique product on platform
+            data_tests:
+              - relationships:
+                  field: product_id
+                  to:  source('SQL_SERVER_DBO','PRODUCTS')
           - name: quantity
+            description: >
+              Number of units for each product and each month for products
+            data_tests:
+              - positive_values
           - name: month
+            description: Each month for the budget -> End of the month
+            data_tests:
+              - not_null
           - name: _fivetran_synced
+            description: Date that the data was loaded
+            data_tests:
+              - not_null

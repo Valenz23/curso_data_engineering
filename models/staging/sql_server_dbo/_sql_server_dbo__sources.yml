@@ -1,0 +1,207 @@
+sources:
+
+  - name: SQL_SERVER_DBO # name of the source 
+    schema: SQL_SERVER_DBO # this is the schema our raw data lives in
+    database: ALUMNO23_DEV_BRONZE_DB # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 365, period: day} # cambiar 24 | hour
+      error_after: {count: 730, period: day} # cambiar 48 | hour
+
+    tables:
+      - name: ADDRESSES
+        loaded_at_field: _FIVETRAN_SYNCED
+        description: list of MURICA's addresses with details
+        columns:
+          - name: ADDRESS_ID
+            data_tests:
+              - not_null
+              - unique
+          - name: ZIPCODE
+            data_tests:
+              - not_null
+          - name: COUNTRY
+            data_tests:
+              - not_null
+          - name: ADDRESS
+            data_tests:
+              - not_null
+          - name: STATE
+            data_tests:
+              - not_null
+          - name: _FIVETRAN_DELETED
+          - name: _FIVETRAN_SYNCED
+            data_tests:
+              - not_null
+
+      - name: EVENTS
+        loaded_at_field: _fivetran_synced
+        description: events at online page
+        columns:
+          - name: event_id
+            data_tests:
+              - not_null
+          - name: page_url
+            data_tests:
+              - not_null
+          - name: event_type
+            data_tests:
+              - not_null
+          - name: user_id
+            data_tests:
+              - not_null
+          - name: product_id # nulos
+          - name: session_id
+            data_tests:
+              - not_null
+          - name: created_at
+            data_tests:
+              - not_null
+          - name: order_id # nulos
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
+            data_tests:
+              - not_null
+
+      - name: ORDERS
+        loaded_at_field: _fivetran_synced
+        description: list of all orders
+        columns:
+          - name: order_id
+            data_tests:
+              - not_null
+              - unique
+          - name: shipping_service # nulos
+          - name: shipping_cost
+            data_tests:
+              - not_null
+          - name: address_id
+            data_tests:
+              - not_null
+          - name: created_at
+            data_tests:
+              - not_null
+          - name: promo_id # nulos
+          - name: estimated_delivery_at # nulos
+          - name: order_cost
+            data_tests:
+              - not_null
+          - name: user_id
+            data_tests:
+              - not_null
+          - name: order_total
+            data_tests:
+              - not_null
+          - name: delivered_at # nulos
+          - name: tracking_id #nulos
+          - name: status
+            data_tests:
+              - not_null
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
+            data_tests:
+              - not_null
+
+      - name: ORDER_ITEMS
+        loaded_at_field: _fivetran_synced
+        description: line order with items
+        columns:
+          - name: order_id
+            data_tests:
+              - not_null
+          - name: product_id
+            data_tests:
+              - not_null
+          - name: quantity
+            data_tests:
+              - not_null
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
+            data_tests:
+              - not_null
+
+      - name: PRODUCTS
+        loaded_at_field: _fivetran_synced
+        description: list of products & details
+        columns:
+          - name: product_id
+            data_tests:
+              - not_null
+              - unique
+          - name: price
+            data_tests:
+              - not_null
+          - name: name
+            data_tests:
+              - not_null
+          - name: inventory
+            data_tests:
+              - not_null
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
+            data_tests:
+              - not_null
+
+      - name: PROMOS
+        loaded_at_field: _fivetran_synced
+        description: promos on products
+        columns:
+          - name: promo_id
+            description: promo's id
+            data_tests:
+              - not_null
+              - unique
+          - name: discount
+            description: discount in dollars
+            data_tests:
+              - not_null
+          - name: status
+            description: status of the promo
+            data_tests:
+              - not_null
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
+            description: Date when is was loaded
+            data_tests:
+              - not_null
+
+      - name: USERS
+        loaded_at_field: _fivetran_synced
+        description: list of users with other things
+        columns:
+          - name: user_id
+            data_tests:
+              - not_null
+              - unique
+          - name: updated_at
+            data_tests:
+              - not_null
+          - name: address_id 
+            data_tests:
+              - not_null
+          - name: last_name
+            data_tests:
+              - not_null
+          - name: created_at
+            data_tests:
+              - not_null
+          - name: phone_number
+            data_tests:
+              - not_null
+          - name: total_orders
+          - name: first_name
+            data_tests:
+              - not_null
+          - name: email
+            data_tests:
+              - not_null
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
+            description: Date when is was loaded
+            data_tests:
+              - not_null

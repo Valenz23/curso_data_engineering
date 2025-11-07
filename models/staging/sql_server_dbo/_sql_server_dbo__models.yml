@@ -1,0 +1,22 @@
+models:
+
+  - name: stg_sql_server_dbo__promos
+    description: promos info
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: promo_id
+        data_type: text
+        constraints:
+          - type: primary_key
+      - name: promo_name
+        data_type: text
+      - name: discount_dollar
+        data_type: int
+      - name: status
+        data_type: boolean
+      - name: date_load_utc
+        data_type: timestamp_tz        
+      - name: date_deleted
+        data_type: boolean

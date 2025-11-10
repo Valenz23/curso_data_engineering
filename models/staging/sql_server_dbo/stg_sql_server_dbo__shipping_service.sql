@@ -4,18 +4,17 @@
     )
 }}
 
-with src_order_items as (
+with src_orders as (
     select *
-    from {{ source("SQL_SERVER_DBO", "ORDER_ITEMS") }}
+    from {{ source("SQL_SERVER_DBO", "ORDERS") }}
 ),
 renamed_casted AS (
-    SELECT
-        order_id,
-        product_id,
-        quantity,
+    SELECT distinct
+        md5(SHIPPING_SERVICE) as shipping_service_id,
+        shipping_service as shipping_service_name,
         convert_timezone('UTC',_fivetran_synced) AS date_load_utc,
         _fivetran_deleted AS date_deleted
-    FROM src_order_items
+    FROM src_orders
     )
 
 SELECT * FROM renamed_casted

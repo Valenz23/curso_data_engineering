@@ -10,12 +10,12 @@ with src_product as (
 ),
 renamed_casted AS (
     SELECT
-        product_id
-        , name
-        , price
-        , inventory
-        , _fivetran_deleted AS date_deleted
-        , _fivetran_synced AS date_load
+        product_id,
+        name,
+        price,
+        inventory, -- este que?
+        convert_timezone('UTC',_fivetran_synced) AS date_load_utc,
+        _fivetran_deleted AS date_deleted
     FROM src_product
     )
 

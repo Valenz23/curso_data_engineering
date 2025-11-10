@@ -10,17 +10,17 @@ with src_users as (
 ),
 renamed_casted AS (
     SELECT
-        user_id
-        , first_name
-        , last_name
-        , phone_number
-        , email
-        , total_orders
-        , updated_at
-        , created_at
-        , address_id
-        , _fivetran_deleted AS date_deleted
-        , _fivetran_synced AS date_load
+        user_id,
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        total_orders,
+        updated_at,
+        convert_timezone('UTC',created_at) as created_at,
+        address_id,
+        convert_timezone('UTC',_fivetran_synced) AS date_load_utc,        
+        _fivetran_deleted AS date_deleted
     FROM src_users
     )
 

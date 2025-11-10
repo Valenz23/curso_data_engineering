@@ -6,7 +6,6 @@ models:
       contract: 
         enforced: true
     columns:
-
       - name: promo_id
         data_type: text
         constraints:
@@ -14,7 +13,7 @@ models:
       - name: promo_name
         data_type: text
       - name: discount_dollar
-        data_type: int
+        data_type: integer
       - name: status
         data_type: boolean
       - name: date_load_utc
@@ -35,7 +34,7 @@ models:
       - name: address
         data_type: text
       - name: zipcode
-        data_type: int
+        data_type: integer
       - name: state
         data_type: text
       - name: country
@@ -60,7 +59,7 @@ models:
       - name: price
         data_type: float
       - name: inventory
-        data_type: int
+        data_type: integer
       - name: date_load_utc
         data_type: timestamp_tz
       - name: date_deleted
@@ -85,7 +84,7 @@ models:
       - name: email
         data_type: text
       - name: total_orders
-        data_type: int
+        data_type: integer
       - name: updated_at
         data_type: timestamp_tz
       - name: created_at
@@ -140,18 +139,30 @@ models:
           - relationships:
               field: shipping_service_id
               to: ref('stg_sql_server_dbo__shipping_service')
+        constraints:
+          - type: foreign_key
+            to: ref('stg_sql_server_dbo__shipping_service')
+            to_columns: [shipping_service_id]
       - name: address_id # fk de addresses
         data_type: text
         data_tests:
           - relationships:
               field: address_id
               to: ref('stg_sql_server_dbo__addresses')
+        constraints:
+          - type: foreign_key
+            to: ref('stg_sql_server_dbo__addresses')
+            to_columns: [address_id]
       - name: USER_ID # fk de users
         data_type: text
         data_tests:
           - relationships:
               field: user_id
               to: ref('stg_sql_server_dbo__users')
+        constraints:
+          - type: foreign_key
+            to: ref('stg_sql_server_dbo__users')
+            to_columns: [user_id]
       - name: SHIPPING_COST
         data_type: float
       - name: CREATED_AT
@@ -193,14 +204,22 @@ models:
           - relationships:
               field: order_id
               to: ref('stg_sql_server_dbo__orders')
+        constraints:
+          - type: foreign_key
+            to: ref('stg_sql_server_dbo__orders')
+            to_columns: [order_id]
       - name: product_id
         data_type: text
         data_tests:
           - relationships:
               field: product_id
               to: ref('stg_sql_server_dbo__products')
+        constraints:
+          - type: foreign_key
+            to: ref('stg_sql_server_dbo__products')
+            to_columns: [product_id]              
       - name: quantity
-        data_type: int
+        data_type: integer
       - name: date_load_utc
         data_type: timestamp_tz
       - name: date_deleted
@@ -213,7 +232,7 @@ models:
         enforced: true
     constraints:
       - type: primary_key
-        columns: []
+        columns: [event_id, session_id]
     columns:
       - name: event_id
         data_type: text
@@ -225,8 +244,24 @@ models:
           - accepted_values:
               values: ['package_shipped','add_to_cart','checkout','page_view'] # poner en otra tabla
       - name: user_id
-        data_type: text        
+        data_type: text   
+        data_tests:
+          - relationships:
+              field: user_id
+              to: ref('stg_sql_server_dbo__users')
+        constraints:
+          - type: foreign_key
+            to: ref('stg_sql_server_dbo__users')
+            to_columns: [user_id]     
       - name: product_id # tiene nulos
+        # data_tests:
+        #   - relationships:
+        #       field: product_id
+        #       to: ref('stg_sql_server_dbo__products')
+        # constraints:
+        #   - type: foreign_key
+        #     to: ref('stg_sql_server_dbo__products')
+        #     to_columns: [product_id]     
         data_type: text      
       - name: session_id
         data_type: text
@@ -234,7 +269,7 @@ models:
         data_type: timestamp_tz
       - name: order_id # tiene nulos
         data_type: text
-      - name: _fivetran_deleted
-        data_type: boolean
-      - name: _fivetran_synced
+      - name: date_load_utc
         data_type: timestamp_tz
+      - name: date_deleted
+        data_type: boolean

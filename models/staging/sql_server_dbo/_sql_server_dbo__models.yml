@@ -93,8 +93,6 @@ models:
         data_type: text        
         constraints:
           - type: foreign_key
-            to: ref('stg_sql_server_dbo__addresses')
-            to_columns: [address_id]
         data_tests:
           - relationships:
               field: address_id
@@ -141,8 +139,6 @@ models:
               to: ref('stg_sql_server_dbo__shipping_service')
         constraints:
           - type: foreign_key
-            to: ref('stg_sql_server_dbo__shipping_service')
-            to_columns: [shipping_service_id]
       - name: address_id # fk de addresses
         data_type: text
         data_tests:
@@ -151,8 +147,6 @@ models:
               to: ref('stg_sql_server_dbo__addresses')
         constraints:
           - type: foreign_key
-            to: ref('stg_sql_server_dbo__addresses')
-            to_columns: [address_id]
       - name: USER_ID # fk de users
         data_type: text
         data_tests:
@@ -161,8 +155,6 @@ models:
               to: ref('stg_sql_server_dbo__users')
         constraints:
           - type: foreign_key
-            to: ref('stg_sql_server_dbo__users')
-            to_columns: [user_id]
       - name: SHIPPING_COST
         data_type: float
       - name: CREATED_AT
@@ -206,8 +198,6 @@ models:
               to: ref('stg_sql_server_dbo__orders')
         constraints:
           - type: foreign_key
-            to: ref('stg_sql_server_dbo__orders')
-            to_columns: [order_id]
       - name: product_id
         data_type: text
         data_tests:
@@ -215,9 +205,7 @@ models:
               field: product_id
               to: ref('stg_sql_server_dbo__products')
         constraints:
-          - type: foreign_key
-            to: ref('stg_sql_server_dbo__products')
-            to_columns: [product_id]              
+          - type: foreign_key           
       - name: quantity
         data_type: integer
       - name: date_load_utc
@@ -251,8 +239,6 @@ models:
               to: ref('stg_sql_server_dbo__users')
         constraints:
           - type: foreign_key
-            to: ref('stg_sql_server_dbo__users')
-            to_columns: [user_id]     
       - name: product_id # tiene nulos
         # data_tests:
         #   - relationships:

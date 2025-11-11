@@ -6,7 +6,7 @@
 
 with src_orders as (
     select *
-    from {{ source("SQL_SERVER_DBO", "ORDERS") }}
+    from {{ ref("base_sql_server_dbo_shipping_service") }}
 ),
 renamed_casted AS (
     SELECT distinct

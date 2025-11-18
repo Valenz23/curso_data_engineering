@@ -1,7 +1,7 @@
 models:
 
   - name: stg_nascar__car_manufacturer
-    description: "base model for each car manufacturer"
+    description: "model for each car manufacturer"
     columns:
       - name: car_manufacturer_id
         data_type: varchar
@@ -12,5 +12,20 @@ models:
       - name: car_manufacturer_name
         data_type: varchar
         description: "manufacturer of the car"
+        data_tests:
+          - not_null
+        
+  - name: stg_nascar__team
+    description: "model for each team"
+    columns:
+      - name: team_id
+        data_type: varchar
+        description: "id"
+        data_tests:
+          - not_null
+          - unique
+      - name: team_name
+        data_type: varchar
+        description: "name of the team which fielded the driver and car in a particular observation"
         data_tests:
           - not_null

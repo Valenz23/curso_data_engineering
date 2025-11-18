@@ -1,0 +1,16 @@
+models:
+
+  - name: stg_nascar__car_manufacturer
+    description: "base model for each car manufacturer"
+    columns:
+      - name: car_manufacturer_id
+        data_type: varchar
+        description: "id"
+        data_tests:
+          - not_null
+          - unique
+      - name: car_manufacturer_name
+        data_type: varchar
+        description: "manufacturer of the car"
+        data_tests:
+          - not_null

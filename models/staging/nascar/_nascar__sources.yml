@@ -9,18 +9,24 @@ sources:
           - name: year
             data_type: varchar
             description: "year in which the observation took place"
+            data_tests:
+              - not_null
           - name: race_num
             data_type: varchar
             description: >
               - order of races each season, with 1 being the first and 36 being the last
               - to include the pre-season Daytona Duel races (which count as a stage), 
                 I gave Duel 1 the value '-1' and Duel 2 the value '-2'
+            data_tests:
+              - not_null
           - name: track
             data_type: varchar
             description: >
               - shortened name of the track at which the observation took place
               - tracks with terrain changes / multiple layouts were considered separate tracks, 
                 ex: Bristol and Bristol Dirt, Daytona and Daytona Road Course
+            data_tests:
+              - not_null
           - name: track_type
             data_type: varchar
             description: >
@@ -30,49 +36,79 @@ sources:
                 (drafting / pack racing tracks), road course (tracks with both left and right turns)
               - notably, Atlanta was the only track to change its track type in the observed years, 
                 being reconfigured from intermediate to superspeedway in 2022
+            data_tests:
+              - not_null
           - name: fin
             data_type: varchar
             description: "final finishing order of each race"
+            data_tests:
+              - not_null
           - name: start
             data_type: varchar
             description: >
               starting order of each race 
                 (no distinction between traditional qualifying and formula / owners-points-based starting lineups)
+            data_tests:
+              - not_null
           - name: car_num
             data_type: varchar
             description: "the number printed on the race car, distinct from all other competitors in each race"
+            data_tests:
+              - not_null
           - name: driver
             data_type: varchar
             description: "full name of the driver "
+            data_tests:
+              - not_null
           - name: manu
             data_type: varchar
             description: "manufacturer of the car"
+            data_tests:
+              - not_null
           - name: team_name
             data_type: varchar
             description: "name of the team which fielded the driver and car in a particular observation"
+            data_tests:
+              - not_null
           - name: laps
             data_type: varchar
             description: "number of laps the driver completed in the race"
+            data_tests:
+              - not_null
           - name: laps_led
             data_type: varchar
             description: "number of laps the driver led in the race"
+            data_tests:
+              - not_null
           - name: status
             data_type: varchar
             description: >
               - 'running' for drivers who finished the race; otherwise, the reason they failed to finish
               - 'accident' is a synonym for 'crash' (used interchangeably on different sources)
+            data_tests:
+              - not_null
           - name: points
             data_type: varchar
             description: "total points earned in the race"
+            data_tests:
+              - not_null
           - name: stage_1
             data_type: varchar
             description: "finishing position in stage 1"
+            data_tests:
+              - not_null
           - name: stage_2
             data_type: varchar
             description: "finishing position in stage 2"
+            data_tests:
+              - not_null
           - name: stage_3_or_duel
             data_type: varchar
             description: "finishing position in stage 3 (Coca Cola 600 only) or Daytona Duel race (counts as a stage)"
+            data_tests:
+              - not_null
           - name: stage_points
             data_type: varchar
             description: "total stage points earned in the race"
+            data_tests:
+              - not_null

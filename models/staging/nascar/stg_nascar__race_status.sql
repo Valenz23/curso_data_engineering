@@ -1,0 +1,16 @@
+-- with source as (
+--     select * from {{ source('nascar', 'nascar_results') }}
+-- ),
+-- distinct_race_status as (
+--     select distinct
+--         status::varchar(50) as race_status_desc
+--     from source
+-- ),
+-- final as (
+--     select
+--         {{ dbt_utils.generate_surrogate_key(['race_status_desc']) }} as race_status_id,
+--         race_status_desc
+--     from distinct_race_status
+-- )
+
+-- select * from final

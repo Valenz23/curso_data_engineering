@@ -1,7 +1,50 @@
 models:
 
+  - name: base_nascar__nascar_results
+    description: >
+      - base model for all stages
+      - same description as sources, columns as well
+    columns:
+      - name: year
+        data_type: varchar
+      - name: race_num
+        data_type: varchar
+      - name: track
+        data_type: varchar
+      - name: track_type
+        data_type: varchar
+      - name: fin
+        data_type: varchar
+      - name: start
+        data_type: varchar
+      - name: car_num
+        data_type: varchar
+      - name: driver
+        data_type: varchar
+      - name: manu
+        data_type: varchar
+      - name: team_name
+        data_type: varchar
+      - name: laps
+        data_type: varchar
+      - name: laps_led
+        data_type: varchar
+      - name: status
+        data_type: varchar
+      - name: points
+        data_type: varchar
+      - name: stage_1
+        data_type: varchar
+      - name: stage_2
+        data_type: varchar
+      - name: stage_3_or_duel
+        data_type: varchar
+      - name: stage_points
+        data_type: varchar
+
+
   - name: stg_nascar__car_manufacturer
-    description: "model for each car manufacturer"
+    description: "model for car manufacturer"
     columns:
       - name: car_manufacturer_id
         data_type: varchar
@@ -11,12 +54,13 @@ models:
           - unique
       - name: car_manufacturer_name
         data_type: varchar
-        description: "manufacturer of the car"
+        description: "car's manufacturer name"
         data_tests:
           - not_null
+
         
   - name: stg_nascar__team
-    description: "model for each team"
+    description: "model for teams"
     columns:
       - name: team_id
         data_type: varchar
@@ -29,6 +73,7 @@ models:
         description: "name of the team which fielded the driver and car in a particular observation"
         data_tests:
           - not_null
+
 
   - name: stg_nascar__track_type
     description: "every track type"
@@ -44,6 +89,7 @@ models:
         description: "name of the track type"
         data_tests:
           - not_null
+
           
   - name: stg_nascar__season
     description: "year since we have data"
@@ -60,17 +106,19 @@ models:
         data_tests:
           - not_null
 
-  # - name: stg_nascar__race_status
-  #   description: "finishing status of the driver: running, accident, ..."
-  #   columns:
-  #     - name: race_status_id
-  #       data_type: varchar
-  #       description: "id"
-  #       data_tests:
-  #         - not_null
-  #         - unique
-  #     - name: race_status_desc
-  #       data_type: varchar
-  #       description: "see model description"
-  #       data_tests:
-  #         - not_null
+
+  - name: stg_nascar__race_status
+    description: "finishing status of the driver: Completed, DQ or DNF"
+    columns:
+      - name: race_status_id
+        data_type: varchar
+        description: "id"
+        data_tests:
+          - not_null
+          - unique
+      - name: race_status_desc
+        data_type: varchar
+        description: "see model description"
+        data_tests:
+          - not_null
+

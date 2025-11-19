@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('nascar', 'nascar_results') }}
+    select * from {{ ref("base_nascar__nascar_results") }}
 ),
 distinct_car_manufacturers as (
     select distinct

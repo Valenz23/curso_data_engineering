@@ -1,10 +1,10 @@
-with source as (
+with base as (
     select * from {{ ref('base_nascar__nascar_results') }}
 ),
 distinct_track_types as (
     select distinct
         track_type::varchar(50) as track_type_name
-    from source
+    from base
 ),
 final as (
     select

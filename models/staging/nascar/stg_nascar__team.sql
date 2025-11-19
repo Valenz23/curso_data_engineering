@@ -1,10 +1,10 @@
-with source as (
-    select * from {{ ref('base_nascar__nascar_results') }}
+with base as ( 
+    select * from {{ ref("base_nascar__nascar_results") }}
 ),
 distinct_team_names as (
     select distinct
         team_name::varchar(50) as team_name
-    from source
+    from base
 ),
 final as (
     select

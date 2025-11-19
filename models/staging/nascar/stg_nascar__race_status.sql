@@ -1,10 +1,10 @@
-with source as (
+with base as (
     select * from {{ ref('base_nascar__nascar_results') }}
 ),
 distinct_race_status as (
     select 
         distinct lower(status)::varchar(50) as race_status_desc
-    from source
+    from base
 ),
 case_race_status as (
     select

@@ -42,7 +42,6 @@ models:
       - name: stage_points
         data_type: varchar
 
-
   - name: stg_nascar__car_manufacturer
     description: "model for car manufacturer"
     columns:
@@ -58,7 +57,6 @@ models:
         data_tests:
           - not_null
 
-        
   - name: stg_nascar__team
     description: "model for teams"
     columns:
@@ -74,7 +72,6 @@ models:
         data_tests:
           - not_null
 
-
   - name: stg_nascar__track_type
     description: "every track type"
     columns:
@@ -89,7 +86,6 @@ models:
         description: "name of the track type"
         data_tests:
           - not_null
-
           
   - name: stg_nascar__season
     description: "year since we have data"
@@ -106,7 +102,6 @@ models:
         data_tests:
           - not_null
 
-
   - name: stg_nascar__race_status
     description: "finishing status of the driver: Completed, DQ or DNF"
     columns:
@@ -121,4 +116,26 @@ models:
         description: "see model description"
         data_tests:
           - not_null
-
+    
+  - name: stg_nascar__track
+    description: track where there was a race
+    columns:
+      - name: track_id
+        data_type: varchar
+        description: id of the track
+        data_tests:
+          # - unique  -- we have 2 atlantas with different track type
+          - not_null
+      - name: track_type_id
+        data_type: varchar
+        description: id from track_type model
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__track_type')
+                  field: track_type_id
+      - name: track_name
+        data_type: varchar
+        description: shortened name of the track at which the observation took place
+        data_tests:
+          - not_null

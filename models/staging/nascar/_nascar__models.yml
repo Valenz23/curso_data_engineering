@@ -124,8 +124,47 @@ models:
         data_type: varchar
         description: id of the track
         data_tests:
-          # - unique  -- we have 2 atlantas with different track type
+          - unique  
           - not_null
+      # - name: track_type_id
+      #   data_type: varchar
+      #   description: id from track_type model
+      #   data_tests:
+      #     - relationships:
+      #           arguments: 
+      #             to: ref('stg_nascar__track_type')
+      #             field: track_type_id
+      - name: track_name
+        data_type: varchar
+        description: shortened name of the track at which the observation took place
+        data_tests:
+          - not_null
+
+  - name: stg_nascar__race
+    description: model to store a race data
+    columns:
+      - name: race_id
+        data_type: varchar
+        description: race id
+        data_tests:
+          - unique
+          - not_null
+      - name: season_id
+        data_type: varchar
+        description: season id 
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__season')
+                  field: season_id
+      - name: track_id
+        data_type: varchar
+        description: track id
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__track')
+                  field: track_id
       - name: track_type_id
         data_type: varchar
         description: id from track_type model
@@ -134,8 +173,8 @@ models:
                 arguments: 
                   to: ref('stg_nascar__track_type')
                   field: track_type_id
-      - name: track_name
-        data_type: varchar
-        description: shortened name of the track at which the observation took place
+      - name: race_num
+        data_type: number
+        description: number of the race in the season
         data_tests:
           - not_null

@@ -4,7 +4,7 @@ with src as (
 renamed as (
     select
         year,       
-        race_num ,
+        race_num,
         track,
         track_type,
         fin,

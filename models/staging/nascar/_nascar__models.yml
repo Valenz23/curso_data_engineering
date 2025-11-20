@@ -126,14 +126,6 @@ models:
         data_tests:
           - unique  
           - not_null
-      # - name: track_type_id
-      #   data_type: varchar
-      #   description: id from track_type model
-      #   data_tests:
-      #     - relationships:
-      #           arguments: 
-      #             to: ref('stg_nascar__track_type')
-      #             field: track_type_id
       - name: track_name
         data_type: varchar
         description: shortened name of the track at which the observation took place
@@ -178,3 +170,151 @@ models:
         description: number of the race in the season
         data_tests:
           - not_null
+          - check_race_num
+
+  - name: stg_nascar__car
+    description: "car info: team, manufacturer, number"
+    columns:
+      - name: car_id
+        data_type: varchar
+        description: car id
+        data_tests:
+          - not_null
+          - unique
+      - name: car_manufacturer_id
+        data_type: varchar
+        description: car manufacturer id from that model
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__car_manufacturer')
+                  field: car_manufacturer_id
+      - name: car_num
+        data_type: number
+        description: number of the car
+        data_tests:
+          - not_null
+          - check_car_num
+
+  - name: stg_nascar__driver
+    description: model for driver info
+    columns:
+      - name: driver_id
+        data_type: varchar
+        description: driver id
+        data_tests:
+          - unique
+          - not_null
+      - name: driver_name
+        description:  name of the driver
+        data_type: varchar
+        data_tests:
+          - not_null
+
+  - name: stg_nascar_driver_assigment
+    description: team's driver assigment for a race
+    columns:
+      - name: driver_assigment_id
+        description: id
+        data_type: varchar
+        data_tests:
+          - unique
+          - not_null
+      - name: driver_id
+        description: id of the driver
+        data_type: varchar
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__driver')
+                  field: driver_id
+      - name: car_id
+        description: id of the car
+        data_type: varchar
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__car')
+                  field: car_id
+      - name: team_id
+        description: id of the team
+        data_type: varchar
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__team')
+                  field: team_id
+
+  - name: stg_nascar_race_performance
+    description: driver race performance
+    columns:
+      - name: race_id
+        description: id of the race
+        data_type: varchar
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__race')
+                  field: race_id
+      - name: driver_assigment_id
+        description: assignation driver-car-team per race
+        data_type: varchar
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar_driver_assigment')
+                  field: driver_assigment_id
+      - name: race_status_id
+        description: way that driver finish the race
+        data_type: varchar
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__race_status')
+                  field: race_status_id
+      - name: start_pos
+        description: starting position of the race
+        data_type: number
+        # data_tests:
+        #   - check_position
+      - name: final_pos
+        description: final position of the race
+        data_type: number
+        # data_tests:
+        #   - check_position
+      - name: stage_1_pos
+        description: stage 1 position final [1-10]
+        data_type: number
+        # data_tests:
+        #   - check_stage_positions
+      - name: stage_2_pos
+        description: stage 2 position final [1-10]
+        data_type: number
+        # data_tests:
+        #   - check_stage_positions
+      - name: stage_3_or_duel_pos
+        description: stage 3 or duel final position [1-10]
+        data_type: number
+        # data_tests:
+        #   - check_stage_positions
+      - name: laps_completed
+        description: laps completed in the race
+        data_type: number
+        # data_tests:
+        #   - check_positive_values
+      - name: laps_led
+        description: leading laps in the race
+        data_type: number
+        # data_tests:
+        #   - check_positive_values
+        #   - check_laps_led
+      - name: stage_points
+        description: points awarded from wining stages
+        data_type: number
+        # data_tests:
+        #   - check_stage_points
+      - name: total_points
+        description: points awarded from wining a race + stages
+        data_type: number
+        # data_tests:
+        #   - check_total_points

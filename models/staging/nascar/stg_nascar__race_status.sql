@@ -16,8 +16,8 @@ case_race_status as (
     from distinct_race_status
 ),
 final as (
-    select
-        distinct {{ dbt_utils.generate_surrogate_key(['race_status_desc']) }} as race_status_id,
+    select distinct 
+        {{ dbt_utils.generate_surrogate_key(['race_status_desc']) }} as race_status_id,
         race_status_desc
     from case_race_status
 )

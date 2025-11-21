@@ -141,6 +141,14 @@ models:
         data_tests:
           - unique
           - not_null
+      - name: race_type_id
+        data_type: varchar
+        description: race_type id
+        data_tests:
+          - relationships:
+                arguments: 
+                  to: ref('stg_nascar__race_type')
+                  field: race_type_id
       - name: season_id
         data_type: varchar
         description: season id 
@@ -318,3 +326,18 @@ models:
         data_type: number
         # data_tests:
         #   - check_total_points
+
+  - name: stg_nascar__race_type
+    description: type of the race in season -> pre-season, reg_season, playoff rounds, final
+    columns:
+      - name: race_type_id
+        description: id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: race_type_desc
+        description: pre_season, regular_season, round_16 , ...
+        data_type: varchar
+        data_tests:
+          - not_null

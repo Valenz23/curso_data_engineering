@@ -1,25 +1,23 @@
+{{ 
+    config(
+        materialized='incremental', 
+        unique_key='race_status_id'
+    )
+}}
+
 with base as (
-    select * from {{ ref('base_nascar__nascar_results') }}
+    select * from {{ ref('base_nascar__race_status') }}
 ),
-distinct_race_status as (
-    select 
-        distinct lower(status)::varchar(50) as race_status_desc
-    from base
-),
-case_race_status as (
-    select
-        case 
-            when race_status_desc = 'running' then 'Completed'
-            when race_status_desc = 'running/dq' then 'DQ'
-            else 'DNF'
-        end as race_status_desc
-    from distinct_race_status
-),
-final as (
-    select distinct 
+renamed as (
+    select  
         {{ dbt_utils.generate_surrogate_key(['race_status_desc']) }} as race_status_id,
-        race_status_desc
-    from case_race_status
+        race_status_desc,
+        synced_at
+    from base
 )
 
-select * from final
+select * from renamed
+
+{% if is_incremental() %}
+  where synced_at > (select max(synced_at) from {{ this }})
+{% endif %}

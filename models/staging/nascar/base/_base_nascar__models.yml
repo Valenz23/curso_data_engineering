@@ -1,0 +1,154 @@
+models:
+
+  - name: base_nascar__car
+    description: "car base model"
+    columns:
+      - name: manu
+        data_type: varchar
+        description: "car manufacturer name"
+      - name: car_num
+        data_type: varchar
+        description: "car number"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "data loaded"
+
+  - name: base_nascar__driver
+    description: " driver base model"
+    columns:
+      - name: driver
+        data_type: varchar
+        description: "driver name"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
+  - name: base_nascar__team
+    description: "team base model"
+    columns:
+      - name: team_name
+        data_type: varchar
+        description: "team name"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loades"
+
+  - name: base_nascar__track
+    description: "track base model"
+    columns:
+      - name: track
+        data_type: varchar
+        description: "track name"
+      - name: track_type
+        data_type: varchar
+        description: "type description"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
+  - name: base_nascar__season
+    description: "season base model"
+    columns:
+      - name: year
+        data_type: varchar
+        description: "season year"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
+  - name: base_nascar__race_type
+    description: "race type base model"
+    columns:
+      - name: race_type_id
+        data_type: varchar
+        description: "id"
+      - name: race_type_desc
+        data_type: varchar
+        description: "description of race type"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
+  - name: base_nascar__race_status
+    description: "race status base model"
+    columns:
+      - name: race_status_desc
+        data_type: varchar
+        description: "description status"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
+  - name: base_nascar__race
+    description: "race base model"
+    columns:
+      - name: year
+        data_type: varchar
+        description: "year of the race"
+      - name: race_num
+        data_type: varchar
+        description: "number of the race"
+      - name: track
+        data_type: varchar
+        description: "track of the race"
+      - name: track_type
+        data_type: varchar
+        description: "track type of the race"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
+  - name: base_nascar__race_performance
+    description: "race performance base model"
+    columns:
+      - name: year
+        data_type: varchar
+        description: "used for extract season id"
+      - name: race_num
+        data_type: varchar
+        description: "used for extract race id"
+      - name: driver
+        data_type: varchar
+        description: "used for extract driver id"
+      - name: car_num
+        data_type: varchar
+        description: "used for extract race id"
+      - name: manu
+        data_type: varchar
+        description: "used for extract ar id"
+      - name: team_name
+        data_type: varchar
+        description: "used for extract team id"
+      - name: status
+        data_type: varchar
+        description: "used for extract ace status id"
+      - name: start
+        data_type: varchar
+        description: "start position of the race"
+      - name: fin
+        data_type: varchar
+        description: "final position of the race"
+      - name: stage_1
+        data_type: varchar
+        description: "stage position in race"
+      - name: stage_2
+        data_type: varchar
+        description: "stage 2 pos in race"
+      - name: stage_3_or_duel
+        data_type: varchar
+        description: "stage 3 or duel pos in race"
+      - name: laps
+        data_type: varchar
+        description: "laps completed in race"
+      - name: laps_led
+        data_type: varchar
+        description: "laps leaded in race"
+      - name: points
+        data_type: varchar
+        description: "point awarded in race"
+      - name: stage_points
+        data_type: varchar
+        description: "stage point awarded in race"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"

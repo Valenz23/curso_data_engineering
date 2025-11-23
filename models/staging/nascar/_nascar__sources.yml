@@ -5,6 +5,7 @@ sources:
       - My insight: we know we have null values in columns: start, points, stage_1, stage_2 and stage_3_or_duels
     database: alumno23_dev_bronze_db
     tables:
+
       - name: nascar_results
         description: "table with all NASCAR results since 2017"
         columns:
@@ -50,8 +51,6 @@ sources:
             description: >
               starting order of each race 
                 (no distinction between traditional qualifying and formula / owners-points-based starting lineups)
-            # data_tests:
-            #   - not_null
           - name: car_num
             data_type: varchar
             description: "the number printed on the race car, distinct from all other competitors in each race"
@@ -92,25 +91,40 @@ sources:
           - name: points
             data_type: varchar
             description: "total points earned in the race"
-            # data_tests:   
-            #   - not_null
           - name: stage_1
             data_type: varchar
             description: "finishing position in stage 1"
-            # data_tests:
-            #   - not_null
           - name: stage_2
             data_type: varchar
             description: "finishing position in stage 2"
-            # data_tests:
-            #   - not_null
           - name: stage_3_or_duel
             data_type: varchar
             description: "finishing position in stage 3 (Coca Cola 600 only) or Daytona Duel race (counts as a stage)"
-            # data_tests:
-            #   - not_null
           - name: stage_points
             data_type: varchar
             description: "total stage points earned in the race"
-            # data_tests:
-            #   - not_null
+          - name: synced_at
+            data_type: varchar
+            description: time when data was synced
+            data_tests:
+              - not_null
+
+      - name: race_type
+        description: race type in season (pre-season, regular season ... playoffs)
+        columns:
+          - name: race_type_id
+            data_type: varchar
+            description: id
+            data_tests:
+              - not_null
+              - unique
+          - name: race_type_desc
+            data_type: varchar
+            description: name desc of race type
+            data_tests:
+              - not_null
+          - name: synced_at
+            data_type: varchar
+            description: time when data was synced
+            data_tests:
+              - not_null

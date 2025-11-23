@@ -146,7 +146,7 @@ models:
         data_tests:
           - unique
           - not_null
-      - name: season_year
+      - name: year
         data_type: number
         description: "year of the season"
         data_tests:

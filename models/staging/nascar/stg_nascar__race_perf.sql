@@ -6,7 +6,7 @@
 }}
 
 with base as (
-    select * from {{ ref('base_nascar__race_performance') }}
+    select * from {{ ref('base_nascar__race_perf') }}
 ),
 renamed as (
     select 

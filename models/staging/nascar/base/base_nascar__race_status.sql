@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source("nascar","nascar_results") }}
+    select * from {{ source("nascar","race_status") }}
 ),
 base as (
     select distinct

@@ -13,6 +13,16 @@ models:
         data_type: timestamp_tz
         description: "data loaded"
 
+  - name: base_nascar__car_manufacturer
+    description: "car manufacturer base model"
+    columns:
+      - name: manu
+        data_type: varchar
+        description: "car manufacturer name"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "data loaded"
+
   - name: base_nascar__driver
     description: " driver base model"
     columns:
@@ -46,25 +56,22 @@ models:
         data_type: timestamp_tz
         description: "loaded"
 
+  - name: base_nascar__track_type
+    description: "track base model"
+    columns:
+      - name: track_type
+        data_type: varchar
+        description: "type description"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded"
+
   - name: base_nascar__season
     description: "season base model"
     columns:
       - name: year
         data_type: varchar
         description: "season year"
-      - name: synced_at
-        data_type: timestamp_tz
-        description: "loaded"
-
-  - name: base_nascar__race_type
-    description: "race type base model"
-    columns:
-      - name: race_type_id
-        data_type: varchar
-        description: "id"
-      - name: race_type_desc
-        data_type: varchar
-        description: "description of race type"
       - name: synced_at
         data_type: timestamp_tz
         description: "loaded"

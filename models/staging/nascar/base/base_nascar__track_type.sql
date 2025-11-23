@@ -1,9 +1,9 @@
 with source as (
-    select * from {{ source("nascar","driver") }}
+    select * from {{ source("nascar","track_type") }}
 ),
 base as (
     select 
-        driver,
+        track_type,
         synced_at
     from source
 )

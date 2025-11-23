@@ -1,109 +1,138 @@
 models:
 
-  - name: base_nascar__nascar_results
-    description: >
-      - base model for all stages
-      - same description as sources, columns as well
+  - name: stg_nascar__car
+    description: "car stg model"
     columns:
-      - name: year
+      - name: car_id
         data_type: varchar
-      - name: race_num
-        data_type: varchar
-      - name: track
-        data_type: varchar
-      - name: track_type
-        data_type: varchar
-      - name: fin
-        data_type: varchar
-      - name: start
-        data_type: varchar
-      - name: car_num
-        data_type: varchar
-      - name: driver
-        data_type: varchar
-      - name: manu
-        data_type: varchar
-      - name: team_name
-        data_type: varchar
-      - name: laps
-        data_type: varchar
-      - name: laps_led
-        data_type: varchar
-      - name: status
-        data_type: varchar
-      - name: points
-        data_type: varchar
-      - name: stage_1
-        data_type: varchar
-      - name: stage_2
-        data_type: varchar
-      - name: stage_3_or_duel
-        data_type: varchar
-      - name: stage_points
-        data_type: varchar
-
-  - name: stg_nascar__car_manufacturer
-    description: "model for car manufacturer"
-    columns:
-      - name: car_manufacturer_id
-        data_type: varchar
-        description: "id"
+        description: "car's id"
         data_tests:
           - not_null
           - unique
-      - name: car_manufacturer_name
+      - name: car_manufacturer
         data_type: varchar
         description: "car's manufacturer name"
         data_tests:
           - not_null
+      - name: car_number
+        data_type: number
+        description: "car number"
+        data_tests:
+          - not_null
+          - check_car_num       # generic test
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
+        data_tests:
+          - not_null
+
+  - name: stg_nascar__driver
+    description: "driver stg model"
+    columns:
+      - name: driver_id
+        data_type: varchar
+        description: "driver's id"
+        data_tests:
+          - unique
+          - not_null
+      - name: driver_name
+        data_type: varchar
+        description: "driver's name"
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
+        data_tests:
+          - not_null
 
   - name: stg_nascar__team
-    description: "model for teams"
+    description: "team stg model"
     columns:
       - name: team_id
         data_type: varchar
-        description: "id"
+        description: "team's id"
         data_tests:
-          - not_null
           - unique
+          - not_null
       - name: team_name
         data_type: varchar
-        description: "name of the team which fielded the driver and car in a particular observation"
+        description: "name of the team"
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
         data_tests:
           - not_null
 
-  - name: stg_nascar__track_type
-    description: "every track type"
+  - name: stg_nascar__track
+    description: "track stg model"
     columns:
-      - name: track_type_id
+      - name: track_id
         data_type: varchar
-        description: "id"
+        description: "track's id"
         data_tests:
-          - not_null
           - unique
-      - name: track_type_name
+          - not_null
+      - name: track_name
         data_type: varchar
-        description: "name of the track type"
+        description: "name of the track"
         data_tests:
           - not_null
-          
+      - name: track_type_desc
+        data_type: varchar
+        description: "track surface desc"
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
+        data_tests:
+          - not_null
+
   - name: stg_nascar__season
-    description: "year since we have data"
+    description: "stg season model"
     columns:
       - name: season_id
         data_type: varchar
+        description: "season's id"
+        data_tests:
+          - unique
+          - not_null
+      - name: season_year
+        data_type: number
+        description: "year of the season"
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
+        data_tests:
+          - not_null
+
+  - name: stg_nascar__race_type
+    description: "race type stg model"
+    columns:
+      - name: race_type_id
+        data_type: varchar
         description: "id"
         data_tests:
           - not_null
           - unique
-      - name: season_year
-        data_type: number
-        description: "year"
+      - name: race_type_desc
+        data_type: varchar
+        description: "description of the race in season"
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
         data_tests:
           - not_null
 
   - name: stg_nascar__race_status
-    description: "finishing status of the driver: Completed, DQ or DNF"
+    description: "race status stg model"
     columns:
       - name: race_status_id
         data_type: varchar
@@ -113,231 +142,138 @@ models:
           - unique
       - name: race_status_desc
         data_type: varchar
-        description: "see model description"
+        description: "driver's way of finishing the race"
         data_tests:
           - not_null
-    
-  - name: stg_nascar__track
-    description: track where there was a race
-    columns:
-      - name: track_id
-        data_type: varchar
-        description: id of the track
-        data_tests:
-          - unique  
-          - not_null
-      - name: track_name
-        data_type: varchar
-        description: shortened name of the track at which the observation took place
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
         data_tests:
           - not_null
 
   - name: stg_nascar__race
-    description: model to store a race data
+    description: "race stg model"
     columns:
       - name: race_id
         data_type: varchar
-        description: race id
+        description: "race's id"
         data_tests:
           - unique
           - not_null
-      - name: race_type_id
-        data_type: varchar
-        description: race_type id
-        data_tests:
-          - relationships:
-                arguments: 
-                  to: ref('stg_nascar__race_type')
-                  field: race_type_id
       - name: season_id
         data_type: varchar
-        description: season id 
+        description: "season's id"
         data_tests:
           - relationships:
-                arguments: 
-                  to: ref('stg_nascar__season')
-                  field: season_id
+              arguments: 
+                to: ref('stg_nascar__season')
+                field: season_id       
       - name: track_id
         data_type: varchar
-        description: track id
+        description: "track's id"
         data_tests:
           - relationships:
-                arguments: 
-                  to: ref('stg_nascar__track')
-                  field: track_id
-      - name: track_type_id
+              arguments: 
+                to: ref('stg_nascar__track')
+                field: track_id  
+      - name: race_type_id
         data_type: varchar
-        description: id from track_type model
+        description: ""
         data_tests:
           - relationships:
-                arguments: 
-                  to: ref('stg_nascar__track_type')
-                  field: track_type_id
+              arguments: 
+                to: ref('stg_nascar__race_type')
+                field: race_type_id  
       - name: race_num
         data_type: number
-        description: number of the race in the season
+        description: "number of the race in season"
         data_tests:
           - not_null
           - check_race_num
-
-  - name: stg_nascar__car
-    description: "car info: team, manufacturer, number"
-    columns:
-      - name: car_id
-        data_type: varchar
-        description: car id
-        data_tests:
-          - not_null
-          - unique
-      - name: car_manufacturer_id
-        data_type: varchar
-        description: car manufacturer id from that model
-        data_tests:
-          - relationships:
-                arguments: 
-                  to: ref('stg_nascar__car_manufacturer')
-                  field: car_manufacturer_id
-      - name: car_num
-        data_type: number
-        description: number of the car
-        data_tests:
-          - not_null
-          - check_car_num
-
-  - name: stg_nascar__driver
-    description: model for driver info
-    columns:
-      - name: driver_id
-        data_type: varchar
-        description: driver id
-        data_tests:
-          - unique
-          - not_null
-      - name: driver_name
-        description:  name of the driver
-        data_type: varchar
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
         data_tests:
           - not_null
 
-  - name: stg_nascar_driver_assigment
-    description: team's driver assigment for a race
-    columns:
-      - name: driver_assigment_id
-        description: id
-        data_type: varchar
-        data_tests:
-          - unique
-          - not_null
-      - name: driver_id
-        description: id of the driver
-        data_type: varchar
-        data_tests:
-          - relationships:
-                arguments: 
-                  to: ref('stg_nascar__driver')
-                  field: driver_id
-      - name: car_id
-        description: id of the car
-        data_type: varchar
-        data_tests:
-          - relationships:
-                arguments: 
-                  to: ref('stg_nascar__car')
-                  field: car_id
-      - name: team_id
-        description: id of the team
-        data_type: varchar
-        data_tests:
-          - relationships:
-                arguments: 
-                  to: ref('stg_nascar__team')
-                  field: team_id
-
-  - name: stg_nascar_race_performance
-    description: driver race performance
+  - name: stg_nascar__race_performance
+    description: "race performance of the driver"
     columns:
       - name: race_id
-        description: id of the race
         data_type: varchar
+        description: "race id"
         data_tests:
           - relationships:
-                arguments: 
-                  to: ref('stg_nascar__race')
-                  field: race_id
-      - name: driver_assigment_id
-        description: assignation driver-car-team per race
+              arguments: 
+                to: ref('stg_nascar__race')
+                field: race_id
+      - name: driver_id
         data_type: varchar
+        description: "driver id"
         data_tests:
           - relationships:
-                arguments: 
-                  to: ref('stg_nascar_driver_assigment')
-                  field: driver_assigment_id
+              arguments: 
+                to: ref('stg_nascar__driver')
+                field: driver_id
+      - name: team_id
+        data_type: varchar
+        description: "team id"
+        data_tests:
+          - relationships:
+              arguments: 
+                to: ref('stg_nascar__team')
+                field: team_id
+      - name: car_id
+        data_type: varchar
+        description: "car id"
+        data_tests:
+          - relationships:
+              arguments: 
+                to: ref('stg_nascar__car')
+                field: car_id
       - name: race_status_id
-        description: way that driver finish the race
         data_type: varchar
+        description: "race status id"
         data_tests:
           - relationships:
-                arguments: 
-                  to: ref('stg_nascar__race_status')
-                  field: race_status_id
+              arguments: 
+                to: ref('stg_nascar__race_status')
+                field: race_status_id
       - name: start_pos
-        description: starting position of the race
         data_type: number
-        # data_tests:
-        #   - check_position
+        description: "start position in race"
       - name: final_pos
-        description: final position of the race
         data_type: number
-        # data_tests:
-        #   - check_position
+        description: "final position in race"
       - name: stage_1_pos
-        description: stage 1 position final [1-10]
         data_type: number
-        # data_tests:
-        #   - check_stage_positions
+        description: "stage 1 position"
       - name: stage_2_pos
-        description: stage 2 position final [1-10]
         data_type: number
-        # data_tests:
-        #   - check_stage_positions
+        description: "stage 2 position"
       - name: stage_3_or_duel_pos
-        description: stage 3 or duel final position [1-10]
         data_type: number
-        # data_tests:
-        #   - check_stage_positions
+        description: "stage 3 or duel position"
       - name: laps_completed
-        description: laps completed in the race
         data_type: number
-        # data_tests:
-        #   - check_positive_values
+        description: "laps completed"
       - name: laps_led
-        description: leading laps in the race
         data_type: number
-        # data_tests:
-        #   - check_positive_values
-        #   - check_laps_led
+        description: "laps leaded"
       - name: stage_points
-        description: points awarded from wining stages
         data_type: number
-        # data_tests:
-        #   - check_stage_points
+        description: "stage points awarded"
+      - name: playoff_points
+        data_type: number
+        description: "playoff points"
+      - name: points
+        data_type: number
+        description: "points"
       - name: total_points
-        description: points awarded from wining a race + stages
         data_type: number
-        # data_tests:
-        #   - check_total_points
-
-  - name: stg_nascar__race_type
-    description: type of the race in season -> pre-season, reg_season, playoff rounds, final
-    columns:
-      - name: race_type_id
-        description: id
-        data_type: varchar
+        description: "sum of stage points + playoff points and points"
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
         data_tests:
-          - not_null
-          - unique
-      - name: race_type_desc
-        description: pre_season, regular_season, round_16 , ...
-        data_type: varchar
-        data_tests:
-          - not_null
+          - not_null        

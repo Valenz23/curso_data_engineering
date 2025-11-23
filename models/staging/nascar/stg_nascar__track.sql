@@ -1,12 +1,24 @@
+{{ 
+    config(
+        materialized='incremental', 
+        unique_key='track_id'
+    )
+}}
+
 with base as ( 
-    select * from {{ ref("base_nascar__nascar_results") }}
+    select * from {{ ref("base_nascar__track") }}
 ),
-selected as (
+renamed as (
     select
-        distinct {{ dbt_utils.generate_surrogate_key(['track']) }} as track_id,
-        -- {{ dbt_utils.generate_surrogate_key(['track_type']) }} as track_type_id,
-        track as track_name
+        {{ dbt_utils.generate_surrogate_key(['track']) }} as track_id,
+        track::varchar(20) as track_name,
+        track_type::varchar(20) as track_type_desc,
+        synced_at
     from base
 )
 
-select * from selected
+select * from renamed
+
+{% if is_incremental() %}
+  where synced_at > (select max(synced_at) from {{ this }})
+{% endif %}

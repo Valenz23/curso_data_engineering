@@ -1,5 +1,25 @@
 models:
 
+  - name: stg_nascar__car_manufacturer
+    description: stf for car manufacturer
+    columns:
+      - name: car_manufacturer_id
+        data_type: varchar
+        description: id
+        data_tests:
+          - unique
+          - not_null
+      - name: car_manufacturer
+        data_type: varchar
+        description: namio
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
+        data_tests:
+          - not_null
+
   - name: stg_nascar__car
     description: "car stg model"
     columns:
@@ -9,11 +29,14 @@ models:
         data_tests:
           - not_null
           - unique
-      - name: car_manufacturer
+      - name: car_manufacturer_id
         data_type: varchar
-        description: "car's manufacturer name"
+        description: "car's manufacturer id"
         data_tests:
-          - not_null
+          - relationships:
+              arguments: 
+                to: ref('stg_nascar__car_manufacturer')
+                field: car_manufacturer_id
       - name: car_number
         data_type: number
         description: "car number"
@@ -66,6 +89,26 @@ models:
         data_tests:
           - not_null
 
+  - name: stg_nascar__track_type
+    description: type of surface of track
+    columns:
+      - name: track_type_id
+        data_type: varchar
+        description: id
+        data_tests:
+          - unique
+          - not_null
+      - name: track_type_desc
+        data_type: varchar
+        description: surface type
+        data_tests:
+          - not_null
+      - name: synced_at
+        data_type: timestamp_tz
+        description: "loaded date"
+        data_tests:
+          - not_null
+
   - name: stg_nascar__track
     description: "track stg model"
     columns:
@@ -75,14 +118,17 @@ models:
         data_tests:
           - unique
           - not_null
+      - name: track_type_id
+        data_type: varchar
+        description: id for track type
+        data_tests:
+          - relationships:
+              arguments: 
+                to: ref('stg_nascar__track_type')
+                field: track_type_id
       - name: track_name
         data_type: varchar
         description: "name of the track"
-        data_tests:
-          - not_null
-      - name: track_type_desc
-        data_type: varchar
-        description: "track surface desc"
         data_tests:
           - not_null
       - name: synced_at
@@ -100,29 +146,9 @@ models:
         data_tests:
           - unique
           - not_null
-      - name: season_year
+      - name: year
         data_type: number
         description: "year of the season"
-        data_tests:
-          - not_null
-      - name: synced_at
-        data_type: timestamp_tz
-        description: "loaded date"
-        data_tests:
-          - not_null
-
-  - name: stg_nascar__race_type
-    description: "race type stg model"
-    columns:
-      - name: race_type_id
-        data_type: varchar
-        description: "id"
-        data_tests:
-          - not_null
-          - unique
-      - name: race_type_desc
-        data_type: varchar
-        description: "description of the race in season"
         data_tests:
           - not_null
       - name: synced_at
@@ -176,15 +202,7 @@ models:
               arguments: 
                 to: ref('stg_nascar__track')
                 field: track_id  
-      - name: race_type_id
-        data_type: varchar
-        description: ""
-        data_tests:
-          - relationships:
-              arguments: 
-                to: ref('stg_nascar__race_type')
-                field: race_type_id  
-      - name: race_num
+      - name: race_number
         data_type: number
         description: "number of the race in season"
         data_tests:
@@ -196,7 +214,7 @@ models:
         data_tests:
           - not_null
 
-  - name: stg_nascar__race_performance
+  - name: stg_nascar__race_perf
     description: "race performance of the driver"
     columns:
       - name: race_id
@@ -215,14 +233,6 @@ models:
               arguments: 
                 to: ref('stg_nascar__driver')
                 field: driver_id
-      - name: team_id
-        data_type: varchar
-        description: "team id"
-        data_tests:
-          - relationships:
-              arguments: 
-                to: ref('stg_nascar__team')
-                field: team_id
       - name: car_id
         data_type: varchar
         description: "car id"
@@ -231,6 +241,14 @@ models:
               arguments: 
                 to: ref('stg_nascar__car')
                 field: car_id
+      - name: team_id
+        data_type: varchar
+        description: "team id"
+        data_tests:
+          - relationships:
+              arguments: 
+                to: ref('stg_nascar__team')
+                field: team_id
       - name: race_status_id
         data_type: varchar
         description: "race status id"

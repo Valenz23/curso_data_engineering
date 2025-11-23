@@ -1,19 +1,19 @@
 {{ 
     config(
         materialized='incremental', 
-        unique_key='race_perf_id'
+        unique_key=['race_id', 'driver_id', 'car_id', 'team_id', 'race_status_id']
     ) 
 }}
 
 with base as (
-    select * from {{ ref('base_nascar__race_performance') }}
+    select * from {{ ref('base_nascar__race_perf') }}
 ),
 renamed as (
     select 
         {{ dbt_utils.generate_surrogate_key(['year','race_num']) }} as race_id,
         {{ dbt_utils.generate_surrogate_key(['driver']) }} as driver_id,       
-        {{ dbt_utils.generate_surrogate_key(['team_name']) }} as team_id,
         {{ dbt_utils.generate_surrogate_key(['car_num', 'manu']) }} as car_id,
+        {{ dbt_utils.generate_surrogate_key(['team_name']) }} as team_id,
         case 
             when lower(status) = 'running' then {{ dbt_utils.generate_surrogate_key(["'Completed'"]) }}
             when lower(status) = 'running/dq' then {{ dbt_utils.generate_surrogate_key(["'DQ'"]) }}

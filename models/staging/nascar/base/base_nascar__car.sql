@@ -1,8 +1,8 @@
 with source as (
-    select * from {{ source("nascar","nascar_results") }}
+    select * from {{ source("nascar","car") }}
 ),
 base as (
-    select distinct
+    select 
         manu,
         car_num,
         synced_at

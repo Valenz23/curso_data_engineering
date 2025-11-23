@@ -1,12 +1,11 @@
 with source as (
-    select * from {{ source("nascar","nascar_results") }}
+    select * from {{ source("nascar","race") }}
 ),
 base as (
-    select distinct
+    select
         year,
         race_num,
         track,
-        track_type,
         synced_at
     from source
 )

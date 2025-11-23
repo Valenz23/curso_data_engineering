@@ -1,17 +1,17 @@
 {{ 
     config(
         materialized='incremental', 
-        unique_key='season_id'
+        unique_key='track_type_id'
     )
 }}
 
 with base as ( 
-    select * from {{ ref("base_nascar__season") }}
+    select * from {{ ref("base_nascar__track_type") }}
 ),
 renamed as (
     select
-        {{ dbt_utils.generate_surrogate_key(['year']) }} as season_id,
-        year::number(4) as year,
+        {{ dbt_utils.generate_surrogate_key(['track_type']) }} as track_type_id,
+        track_type::varchar(20) as track_type_desc,
         synced_at
     from base
 )

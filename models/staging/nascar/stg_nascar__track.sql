@@ -11,8 +11,8 @@ with base as (
 renamed as (
     select
         {{ dbt_utils.generate_surrogate_key(['track']) }} as track_id,
+        {{ dbt_utils.generate_surrogate_key(['track_type']) }} as track_type_id,
         track::varchar(20) as track_name,
-        track_type::varchar(20) as track_type_desc,
         synced_at
     from base
 )

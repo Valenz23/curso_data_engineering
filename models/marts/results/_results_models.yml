@@ -1,0 +1,39 @@
+models:
+
+  - name: fct_race_perf
+    description: "fact table of race results"
+    columns:
+      - name: race_id
+        description: race id
+      - name: driver_id
+        description: driver id
+      - name: car_id
+        description: car id
+      - name: team_id
+        description: team id      
+      - name: race_status_id
+        description: race status id
+      - name: start_pos
+        description: starting position
+      - name: final_pos
+        description: finishing position
+      - name: stage_1_pos
+        description: stage 1 position
+      - name: stage_2_pos
+        description: stage 2 position
+      - name: stage_3_or_duel_pos
+        description: stage 3 o duel position
+      - name: laps_completed
+        description: laps completed in race
+      - name: laps_led
+        description: laps led in race
+      - name: stage_points
+        description: stage points earned in race
+      - name: playoff_points
+        description: playoff points earned in race
+      - name: points
+        description: points earned in race
+      - name: total_points
+        description: total points earned in race
+      - name: synced_at
+        description: load date

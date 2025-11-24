@@ -1,0 +1,12 @@
+{{ 
+    codegen.generate_model_yaml(
+        model_names=[
+            'dim_car',
+            'dim_driver',
+            'dim_race_status',
+            'dim_race',
+            'dim_team'
+        ],
+        include_data_types=true
+    ) 
+}}

@@ -39,3 +39,17 @@ models:
         description: type of the track      
       - name: synced_at
         description: load date
+
+  - name: int_regular_season__classification
+    description: get regular season classification
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories in regular season
+      - name: total_points
+        description: total points earned in regular season
+
+    

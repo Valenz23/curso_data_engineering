@@ -55,3 +55,15 @@ models:
         description: laps of the race
       - name: pct_win_laps_led
         description: pct of leading laps of the winner driver
+
+  - name: fct_regular_season
+    description: get regular season classification
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories in regular season
+      - name: total_points
+        description: total points earned in regular season

@@ -67,3 +67,15 @@ models:
         description: victories in regular season
       - name: total_points
         description: total points earned in regular season
+
+  - name: fct_round_16
+    description: shows drivers classicated to round 16
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 

@@ -52,4 +52,16 @@ models:
       - name: total_points
         description: total points earned in regular season
 
+  - name: int_round_16__classification
+    description: get top 16 driver classicated to round 16
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
     

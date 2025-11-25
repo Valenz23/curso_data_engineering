@@ -125,3 +125,15 @@ models:
         description: driver name
       - name: final_pos
         description: final pos of the driver
+
+  - name: fct_rs_best_nc_winner__comparation
+    description: compares best driver in regular season and nascar champions of the season
+    columns:
+      - name: season
+        description: season
+      - name: best_reg_season
+        description: best driver in regular season
+      - name: nascar_champ
+        description: driver who wins nascar cup
+      - name: same_driver
+        description: comparation

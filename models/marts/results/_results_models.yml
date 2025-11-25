@@ -79,3 +79,49 @@ models:
         description: victories
       - name: total_points
         description: total points 
+
+  - name: fct_round_12
+    description: get top 12 driver classicated to round 12
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_round_8
+    description: get top 8 driver classicated to round 8
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_champ_4
+    description: get top 4 driver classicated to championship 4
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_champ_4_winner
+    description: get nascar cup winner by final pos in championship 4 race
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: final_pos
+        description: final pos of the driver

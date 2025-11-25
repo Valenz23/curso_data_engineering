@@ -1,0 +1,60 @@
+
+models:
+
+  - name: dim_car
+    description: "car dimension"
+    columns:
+      - name: car_id
+        description: car id
+      - name: car_manufacturer
+        description: car manufacturer name
+      - name: car_number
+        description: number of the car        
+      - name: synced_at
+        description: load date
+
+  - name: dim_driver
+    description: "driver dimension"
+    columns:
+      - name: driver_id
+        description: driver id
+      - name: driver_name     
+        description: driver name
+      - name: synced_at
+        description: load date
+    
+  - name: dim_race_status
+    description: "race status dimension"
+    columns:
+      - name: race_status_id
+        description: id
+      - name: race_status_desc
+        description: race status info
+      - name: synced_at
+        description: load date
+
+  - name: dim_race
+    description: "race dimension"
+    columns:
+      - name: race_id
+        description: race id
+      - name: season
+        description: year of the season
+      - name: track_name
+        description: name of the track
+      - name: track_type
+        description: type of the track
+      - name: race_number
+        description: number of the race in season
+      - name: synced_at
+        description: load date
+
+  - name: dim_team
+    description: "team dimension"
+    columns:
+      - name: team_id
+        description: team id
+      - name: team_name
+        description: name of the team
+      - name: synced_at
+        description: load date

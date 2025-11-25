@@ -1,0 +1,127 @@
+models:
+
+  - name: fct_race_perf
+    description: "fact table of race results"
+    columns:
+      - name: race_id
+        description: race id
+      - name: driver_id
+        description: driver id
+      - name: car_id
+        description: car id
+      - name: team_id
+        description: team id      
+      - name: race_status_id
+        description: race status id
+      - name: start_pos
+        description: starting position
+      - name: final_pos
+        description: finishing position
+      - name: stage_1_pos
+        description: stage 1 position
+      - name: stage_2_pos
+        description: stage 2 position
+      - name: stage_3_or_duel_pos
+        description: stage 3 o duel position
+      - name: laps_completed
+        description: laps completed in race
+      - name: laps_led
+        description: laps led in race
+      - name: stage_points
+        description: stage points earned in race
+      - name: playoff_points
+        description: playoff points earned in race
+      - name: points
+        description: points earned in race
+      - name: total_points
+        description: total points earned in race
+      - name: synced_at
+        description: load date
+
+  - name: fct_win_laps_led
+    description: >
+      pct of leadings laps with victory in a race
+      we want to know if leading laps influence race victories
+    columns:
+      - name: season
+        description: season of the race
+      - name: track_name
+        description: track of the race
+      - name: driver_name
+        description: name of the winner driver
+      - name: laps_led
+        description: laps leaded for the winner driver
+      - name: max_laps
+        description: laps of the race
+      - name: pct_win_laps_led
+        description: pct of leading laps of the winner driver
+
+  - name: fct_regular_season
+    description: get regular season classification
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories in regular season
+      - name: total_points
+        description: total points earned in regular season
+
+  - name: fct_round_16
+    description: shows drivers classicated to round 16
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_round_12
+    description: get top 12 driver classicated to round 12
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_round_8
+    description: get top 8 driver classicated to round 8
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_champ_4
+    description: get top 4 driver classicated to championship 4
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: fct_champ_4_winner
+    description: get nascar cup winner by final pos in championship 4 race
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: final_pos
+        description: final pos of the driver

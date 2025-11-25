@@ -1,0 +1,111 @@
+models:
+
+  - name: int_car_car_manufacturer__joined
+    description: "join between car & car_manufacturer models"
+    columns:
+      - name: car_id
+        description: car id
+      - name: car_manufacturer
+        description: car manufacturer name
+      - name: car_number
+        description: car number
+      - name: synced_at
+        description: load date
+
+  - name: int_race_season_track_track_type__joined
+    description: "super join race"
+    columns:
+      - name: race_id
+        description: race id
+      - name: season
+        description: year of the season
+      - name: track_name
+        description: name of the track
+      - name: track_type
+        description: type of the track
+      - name: race_number
+        description: number of the race in season
+      - name: synced_at
+        description: load date
+
+  - name: int_track_track_type__joined
+    description: "join between track & track_type"
+    columns:
+      - name: track_id
+        description: track id
+      - name: track_name
+        description: name of the track
+      - name: track_type_desc
+        description: type of the track      
+      - name: synced_at
+        description: load date
+
+  - name: int_regular_season__classification
+    description: get regular season classification
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories in regular season
+      - name: total_points
+        description: total points earned in regular season
+
+  - name: int_round_16__classification
+    description: get top 16 driver classicated to round 16
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: int_round_12__classification
+    description: get top 12 driver classicated to round 12
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: int_round_8__classification
+    description: get top 8 driver classicated to round 8
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: int_champ_4__classification
+    description: get top 4 driver classicated to championship 4
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: victories
+        description: victories
+      - name: total_points
+        description: total points 
+
+  - name: int_champ_4__winner
+    description: get nascar cup winner by final pos in championship 4 race
+    columns:
+      - name: season
+        description: season
+      - name: driver
+        description: driver name
+      - name: final_pos
+        description: final pos of the driver

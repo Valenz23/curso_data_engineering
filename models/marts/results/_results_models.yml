@@ -37,3 +37,21 @@ models:
         description: total points earned in race
       - name: synced_at
         description: load date
+
+  - name: fct_win_laps_led
+    description: >
+      pct of leadings laps with victory in a race
+      we want to know if leading laps influence race victories
+    columns:
+      - name: season
+        description: season of the race
+      - name: track_name
+        description: track of the race
+      - name: driver_name
+        description: name of the winner driver
+      - name: laps_led
+        description: laps leaded for the winner driver
+      - name: max_laps
+        description: laps of the race
+      - name: pct_win_laps_led
+        description: pct of leading laps of the winner driver

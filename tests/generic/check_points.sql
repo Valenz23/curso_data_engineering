@@ -1,4 +1,4 @@
-{% test positive_values(model, column_name) %}
+{% test check_points(model, column_name) %}
 
    select *
    from {{ model }}

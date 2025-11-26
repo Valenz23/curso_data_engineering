@@ -1,3 +1,9 @@
+{{ 
+    config(
+        materialized='ephemeral', 
+    )
+}}
+
 with 
 dr as (select * from {{ref("dim_driver")}}),
 ra as (select * from {{ref("dim_race")}}),

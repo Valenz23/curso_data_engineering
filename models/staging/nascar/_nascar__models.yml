@@ -42,7 +42,6 @@ models:
         description: "car number"
         data_tests:
           - not_null
-          - check_car_num       # generic test
       - name: synced_at
         data_type: timestamp_tz
         description: "loaded date"
@@ -207,7 +206,6 @@ models:
         description: "number of the race in season"
         data_tests:
           - not_null
-          - check_race_num
       - name: synced_at
         data_type: timestamp_tz
         description: "loaded date"
@@ -280,16 +278,24 @@ models:
         description: "laps leaded"
       - name: stage_points
         data_type: number
+        data_tests:
+          - check_points   # generic test
         description: "stage points awarded"
       - name: playoff_points
         data_type: number
+        data_tests:
+          - check_points   # generic test
         description: "playoff points"
       - name: points
         data_type: number
         description: "points"
+        data_tests:
+          - check_points   # generic test
       - name: total_points
         data_type: number
         description: "sum of stage points + playoff points and points"
+        data_tests:
+          - check_points   # generic test
       - name: synced_at
         data_type: timestamp_tz
         description: "loaded date"

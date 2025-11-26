@@ -12,11 +12,7 @@ renamed as (
     select
         {{ dbt_utils.generate_surrogate_key(['track']) }} as track_id,
         {{ dbt_utils.generate_surrogate_key(['track_type']) }} as track_type_id,
-        -- Truncar a 20 caracteres antes del cast
-        case 
-            when length(track) > 20 then left(track, 20)
-            else track
-        end::varchar(20) as track_name,
+        track::varchar(50) as track_name,
         synced_at
     from base
 )

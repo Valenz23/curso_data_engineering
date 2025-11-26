@@ -26,7 +26,7 @@ renamed as (
         stage_3_or_duel::number(2) as stage_3_or_duel_pos,
         laps::number(3) as laps_completed,
         laps_led::number(3) as laps_led,
-        stage_points::number(2) as stage_points,
+        replace(stage_points, '#REF!', '0')::number(2) as stage_points,
         CASE WHEN race_num > 0 and fin = 1 THEN 5 ELSE 0 END
             + CASE WHEN race_num > 0 and stage_1 = 1 THEN 1 ELSE 0 END
             + CASE WHEN race_num > 0 and stage_2 = 1 THEN 1 ELSE 0 END

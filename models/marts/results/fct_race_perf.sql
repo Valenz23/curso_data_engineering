@@ -1,11 +1,3 @@
-{{ 
-    config(
-        materialized='incremental', 
-        unique_key=['race_id', 'driver_id', 'car_id', 'team_id', 'race_status_id']
-    )
-}}
-
-
 with 
 ra as (select * from {{ ref("dim_race") }}),
 dr as (select * from {{ref("dim_driver")}}),
@@ -42,7 +34,3 @@ joined as (
 )
 
 select * from joined
-
-{% if is_incremental() %}
-  where synced_at > (select max(synced_at) from {{ this }})
-{% endif %}

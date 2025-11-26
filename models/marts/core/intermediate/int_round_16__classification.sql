@@ -1,3 +1,9 @@
+{{ 
+    config(
+        materialized='ephemeral', 
+    )
+}}
+
 with 
 rs as (select * from {{ref("int_regular_season__classification")}}),
 

@@ -1,7 +1,6 @@
 {{ 
     config(
-        materialized='incremental', 
-        unique_key='car_id'
+        materialized='ephemeral', 
     )
 }}
 
@@ -20,7 +19,3 @@ joined as (
 )
 
 select * from joined
-
-{% if is_incremental() %}
-  where synced_at > (select max(synced_at) from {{ this }})
-{% endif %}

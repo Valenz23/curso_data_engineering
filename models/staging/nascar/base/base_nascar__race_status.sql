@@ -8,8 +8,9 @@ base as (
             when lower(status) = 'running/dq' then 'DQ'
             else 'DNF'
         end as race_status_desc,
-        synced_at
+        max(synced_at) as synced_at
     from source
+    group by 1
 )
 
 select * from base

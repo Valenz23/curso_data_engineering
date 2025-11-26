@@ -7,6 +7,7 @@ winner as (
         driver,
         final_pos
     from rs
+    order by season
 )
 
 select * from winner

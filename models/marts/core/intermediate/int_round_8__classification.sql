@@ -9,8 +9,8 @@ dr as (select * from {{ref("dim_driver")}}),
 ra as (select * from {{ref("dim_race")}}),
 r12 as (select * from {{ref("int_round_12__classification")}}),
 
-r8 as (
-    select top 8
+driver_stats as (
+    select
         r12.season as season,
         r12.driver as driver,
         count(case when rp.final_pos=1 then 1 end) as victories,
@@ -20,10 +20,33 @@ r8 as (
     join ra on ra.race_id=rp.race_id
     join r12 on r12.driver = dr.driver_name
     where ra.race_number between 30 and 32
+        and ra.season=r12.season
     group by driver, r12.season
-    order by victories desc, total_points desc
 
 
+),
+ranked_drivers as (
+    select
+        season,
+        driver,
+        victories,
+        total_points,
+        row_number() over (
+            partition by season
+            order by victories desc, total_points desc
+        ) as victory_rank
+    from driver_stats
+),
+top8 as (
+    select 
+        season,
+        driver,
+        victories,
+        total_points,
+        victory_rank
+    from ranked_drivers
+    where victory_rank <= 8
+    order by season, victory_rank
 )
 
-select * from r8
+select * from top8

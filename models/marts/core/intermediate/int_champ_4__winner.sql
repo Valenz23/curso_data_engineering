@@ -18,9 +18,8 @@ winner as (
     join dr on dr.driver_id = rp.driver_id
     join ra on ra.race_id=rp.race_id
     join c4 on c4.driver = dr.driver_name
-    where ra.race_number = 36
-    order by final_pos
-
+    where ra.race_number = 36 and ra.season=c4.season
+    order by season, final_pos
 )
 
 select * from winner
